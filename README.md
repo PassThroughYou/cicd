@@ -1,14 +1,14 @@
 # 개요
 
-- 명칭 : Spring Boot 게시판 API 구현
-- 개발 언어 : Java 11
-- 개발 환경 : Spring Boot 2.7.12
+- 프로젝트 명 : Spring Boot 게시판 API 구현
+- 개발 언어 : Java 17
+- 개발 환경 : Spring Boot 3.3.0
 - 데이터베이스 : H2
-- 형상관리 툴 : GitHub
+- 형상관리 툴 : GitHub Actions
 - 메인 기능
   - 1. 게시판 - CRUD 기능, 페이징, 검색
   - 2. 댓글 - CRUD 기능
-  - 3. 회원 - Security 회원가입, 로그인, 회원정보 수정, 유효성 및 중복 검사 ( 추후 Security 학습 이후 진행 예정)
+  - 3. 회원 - 회원가입, 로그인, 회원정보 수정, 유효성 및 중복 검사 
 - 서브 기능
   - 
 
@@ -17,7 +17,6 @@
 # 1. 데이터 베이스 설계
 
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b6d906c6-f145-4e0e-bc4f-4ea17ae40d79/Untitled.png)
 
 # 2. **API 설계 - CRUD**
 
@@ -72,21 +71,34 @@ implementation 'org.springframework.boot:spring-boot-starter-validation'
 ```
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/board
+    url: jdbc:h2:tcp://localhost:9092/~/testGina
     username: sa
-    password:
+    password: 1234
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
       default_batch_fetch_size: 1000
     properties:
       hibernate:
       show_sql: true
       format_sql: true
+  data:
+    web:
+      pageable:
+        default-page-size: 5
+        max-page-size: 2000
 
 logging.level:
   org.hibernate.SQL: debug
+
+swagger-ui:
+  path: /
+  disable-swagger-default-url: true
+  display-request-duration: true
+  operations-sorter: alpha
+  doc-expansion: none
+
 ```
 
 ---
