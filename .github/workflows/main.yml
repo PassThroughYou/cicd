@@ -49,7 +49,6 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$BUCKET_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name $DEPLOYMENT_GROUP_NAME --s3-location bucket=$BUCKET_NAME, bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
         
 
-
       - name: Set environment variables for database
         env : # env
           DB_URL : ${{secrets.DB_URL}}
@@ -60,58 +59,3 @@ jobs:
           echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
 
-########################################################################
-#  frontend: #build frontend and test
-#    runs-on : ubuntu-latest
-#    needs : backend # start building after completin of backend
-#
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v2
-#
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v2
-#        with:
-#          node-version: '16'  # version of Node.js that is used in React
-#
-#      - name: Install frontend dependencies
-#        working-directory: ./frontend  # change path to frontend directory
-#        run: npm install
-#
-#      - name: Build frontend
-#        working-directory: ./frontend
-#        run: npm run build
-#
-#      - name: Run frontend tests
-#        working-directory: ./frontend
-#        run: npm test
-
-
-  deploy:
-    runs-on : ubuntu-latest
-    needs : backend
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Deply to server
-        run : |
-          echo "Deploying to server...🪄"
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-              
-          # backend deploy
-          cd C:\Users\eldh1\Downloads\CRUD-API-main\CRUD-API-main
-          git pull origin main
-          ./gradlew build -Dspring.datasource.url=${{ secrets.DB_URL }} \
-                          -Dspring.datasource.username=${{ secrets.DB_USERNAME }} \
-                          -Dspring.datasource.password=${{ secrets.DB_PASSWORD }}
-          pm2 restart backend-api
-          
-          # backend deploy
-          cd C:\Users\eldh1\Downloads\frontend
-          git pull origin main
-          npm install
-          npm run build
-          cp -R build/* /path/to/your/nginx/html
-        EOF
