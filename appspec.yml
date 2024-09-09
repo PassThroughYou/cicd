@@ -1,0 +1,17 @@
+version : 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /homeec2-user/cicd
+
+permissions:
+  - object: /home/ec2-user/cicd/
+    owner: ec2-user
+    group: ec2-user
+
+hooks:
+  AfterInstall:
+    - location: scripts/deploy.sh # 수명중기 중 afterinstall방생 시 deploy.sh를 실행하라는 이벤트
+      timeout: 60
+      runas: ec2-user

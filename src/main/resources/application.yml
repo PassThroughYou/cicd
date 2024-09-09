@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/board
+    url: jdbc:h2:tcp://localhost:9092/~/testGina
     username: sa
-    password:
+    password: 1234
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
@@ -21,3 +21,9 @@ spring:
 logging.level:
   org.hibernate.SQL: debug
 
+swagger-ui:
+  path: /
+  disable-swagger-default-url: true
+  display-request-duration: true
+  operations-sorter: alpha
+  doc-expansion: none
