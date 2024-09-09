@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # set deploy path
-REPOSITORY=/home/ec2-user/cicd
+REPOSITORY=/home/ec2-user/crud
 cd $REPOSITORY
 
 # set application name and path
-APP_NAME=cicd
+APP_NAME=crud
 JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep 'SNAPSHOT.jar' | tail -n 1)
 JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
