@@ -6,7 +6,7 @@ on :
       - main
 
 env:
-  PROJECT_NAME : crud #name of project
+  PROJECT_NAME : cicd #name of project
   BUCKET_NAME : crud341410 # name of s3 bucket
   CODE_DEPLOY_APP_NAME: cicdapp
   DEPLOYMENT_GROUP_NAME : cicdapp_deploy
