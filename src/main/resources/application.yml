@@ -5,8 +5,9 @@ spring:
     password: 1234
     driver-class-name: org.h2.Driver
   jpa:
+    database-platform : org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
       default_batch_fetch_size: 1000
     properties:
       hibernate:
