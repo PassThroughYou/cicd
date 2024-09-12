@@ -28,7 +28,7 @@ jobs:
       - name: Set up Java JDK 17
         uses: actions/setup-java@v2
         with:
-          disturibution: 'temurin'
+          distribution: 'temurin'
           java-version: 17
           
 
