@@ -22,7 +22,7 @@ jobs:
     runs-on : ubuntu-latest # Action Runner OS
 
     steps:
-      - name : Checkout
+      - name : Checkout@v5
         uses : actions/checkout@v5
 
       - name: Set up Java JDK 17
